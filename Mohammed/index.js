@@ -19,21 +19,21 @@ console.log(`Ex. No. 1: The summation components of the number ${nc} is ==> ${ad
 
 // 2.
 
-let numberArray = [1, 5, 9];
+let numberArray = [1, 2, 3];
 
 let cubicCalculation = function(numberArray)
 {
-    let cubicNumbersAr = [];
+    let cubicNumbersSum = 0;
 
     for (let i=0; i<numberArray.length; i++)
     {
-        cubicNumbersAr[i] = Math.pow(numberArray[i], 3);
+        cubicNumbersSum += Math.pow(numberArray[i], 3);
     }
 
-    return cubicNumbersAr;
+    return cubicNumbersSum;
 }
 
-console.log(`Ex. No. 2: The cubic of these numbers ${numberArray} are ${cubicCalculation(numberArray)} respectively`);
+console.log(`Ex. No. 2: The cubic sum of the given array numbers [${numberArray}] is ==> ${cubicCalculation(numberArray)}`);
 
 // ==========================================================
 
@@ -262,23 +262,24 @@ else
 
 // 13.
 
-/* let email_userName_part;
-let at;
-let email_domainName_part;
-
-
-let email = 'mbc@gmail.com';
-if (email.includes('@'))
+function validateEmail(string) 
 {
-    let atCount = email.split('@').length-1;
-    if(atCount === 1)
-    {
-    //console.log(emailArr)
-        email_userName_part = emailArr[0];
-        if (email_userName_part.length !== o)
+    if ( !string.includes("@") ||
+         !string.includes(".") ||
+         string.includes(".@") ||
+         string.includes("@.") ||
+         string.includes("..") ||
+         string[string.length - 1] === "." ||
+         string[0] === "@" ||
+         !string.includes(".", string.indexOf("@"))
+       ) 
+       {
+            return false;
+       }    
+       else 
+       {
+            return true;
+       }
 }
 
-/* function isValid(email)
-{
-
-} */ 
+console.log(validateEmail("j@example.com"));
