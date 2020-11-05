@@ -124,24 +124,38 @@ function isEqualNumXandO(param) {
 console.log("o Counter = x Counter?", isEqualNumXandO("zzoo"));
 
 // 12
+
 function isPrime(num) {
-  if (num === 1) {
-    return false;
-  } else if (num === 2) {
-    return true;
-  } else
-    for (let i = 2; i < num; i++) {
+    for (let i = 2; i <= Math.sqrt(num); i++) {
       if (num % i === 0) {
         return false;
       }
-      return true;
     }
+    return true;
 }
-console.log(isPrime(7));
-//console.log(isPrime(9));
-//console.log(isPrime(10));
+console.log('7 is prime?', isPrime(7));
+console.log('9 is prime?', isPrime(9));
+console.log('11 is prime?', isPrime(11));
 
 // 13
+
+function checkEmail(email) {
+  if (
+//    !email.includes("@") ||
+//    !email.includes(".") ||
+    email[email.length - 1] === "." ||
+    email.includes(".@") ||
+    email.includes("@.") ||
+    email.includes("..") ||
+    email[0] === "@" ||
+    !email.includes(".", email.indexOf("@"))
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
+/*
 function validateEmail(email) {
   if (
     // * The string must contain exactly one "@" character.
@@ -152,7 +166,9 @@ function validateEmail(email) {
     email.indexOf(".") !== 0 ||
     //  * e.g. "." cannot be the last character.
     email.lastIndexOf(".") !== email.length - 1 ||
+    email[email.length - 1] === "." ||
     email.indexOf("@") !== 0 ||
+    email[0] === "@" ||
     email.lastIndexOf("@") !== email.length - 1 ||
     //  * e.g. there cannot be consecutive "." characters
     email.includes("..") ||
@@ -160,8 +176,9 @@ function validateEmail(email) {
     email.includes("@@") ||
     //  * e.g. "." cannot be directly before or after "@"
     email.includes("@.") ||
-    email.includes(".@")
+    email.includes(".@")||
     //  * e.g. "@" must have at least one character in front of it.
+    !enail.includes(".", string.indexOf("@"))
     // haven't check this one
   ) {
     return false;
@@ -169,3 +186,29 @@ function validateEmail(email) {
   return true;
 }
 console.log(validateEmail("john@email.com"));
+console.log(validateEmail("j@email.com"));
+*/
+function validateEmail(string) {
+  if (
+    !string.includes("@") ||
+    !string.includes(".") ||
+    string.includes(".@") ||
+    string.includes("@.") ||
+    string.includes("..") ||
+    string[string.length - 1] === "." ||
+    string[0] === "@" ||
+    !string.includes(".", string.indexOf("@"))
+  ) {
+    return false;
+  } else {
+    return true;
+  }
+}
+console.log(validateEmail("j@example.com")); // true
+console.log(validateEmail("john@email.com")); // true
+console.log(validateEmail("john.@email.com")); // false
+console.log(validateEmail("john@email.com.br")); // true
+console.log(validateEmail("john123@email.com")); // true
+
+
+
