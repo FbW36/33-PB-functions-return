@@ -187,11 +187,52 @@ console.log("isPrime? => ", isPrime(10))
 // e.g. "j@example.com" is valid while "@example.com" is invalid.
 // e.g. "john.smith@com" is invalid while "john.smith@email.com" is valid.
 // e.g. "john..smith@email.com" and "john.@email.com" and "john@.email.com" are all invalid.
-function validateEmail(email) 
-    {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
-    }
-    
-console.log(validateEmail('john@.email.com'));//true
-console.log(validateEmail('@example.com'))//false
+function validateEmail(email) {
+	let emailLength = email.length;
+	
+	let numberOfAts = 0;
+	let numberOfDots = 0;
+	
+	// "@" or "." cannot be either the first or the last character:
+	if (email[0] === "@" || email[0] === "." || email[emailLength - 1] === "@" || email[emailLength - 1] === ".") {
+		return false;
+	}
+
+	for (let i = 0; i < email.length; i++) {
+
+		if (email[i] === "@" ) {
+			
+			// "@" and "." do not immadiately follow themselves or one another
+			if (email[i - 1] === "." || email[i - 1] === "@" || email[i + 1] === "." || email[i + 1] === "@") {
+				return false;
+			}
+			
+			// "com" cannot follow "@":
+			let comAfterAt = 0;
+			for (let c = 0; c < "com".length; c++) {
+				if (email[i + 1 + c] === "com"[c]) {
+					comAfterAt += 1;
+				}
+			}
+			if (comAfterAt === 3) {
+				return false;
+			}
+
+			numberOfAts++;
+		}
+
+		if (email[i] === ".") {
+			if (email[i - 1] === "." || email[i + 1] === ".") {
+				return false;
+			}
+			numberOfDots++;
+		}
+	}
+	// exactly one "@" and at least one "."
+	if (numberOfAts !== 1 || numberOfDots < 1) {
+		return false;
+	}
+	
+	return true;
+}
+//I couldn't do it by myself :/ 
