@@ -242,13 +242,18 @@ function isValidEmail(email) {
     email.includes("..") ||
     email.endsWith("@") ||
     email.endsWith(".") ||
-    email.startsWith("@")
+    email.startsWith("@") ||
+    email.includes("@com" || "@de")
   ) {
     return false;
-  } else if (email.includes("@") && email.includes(".")) {
+  } else if (
+    email.includes("@") &&
+    email.includes(".") &&
+    email.includes(".", -3 || ".", -2)
+  ) {
     return true;
   } else {
     return false;
   }
 }
-console.log("valid mail", isValidEmail("@mail@gnk.com"));
+console.log("valid mail", isValidEmail("john.smith@com"));
